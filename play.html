@@ -1,0 +1,88 @@
+<script>
+    function computerPlay()
+    {
+        let randy = Math.random()* 3;
+        var choice;
+        if(randy <= 1)
+            choice = "rock";
+        else if(randy <= 2)
+            choice = "paper";
+        else
+            choice = "scissors";
+        return choice;
+    }
+    
+    function playRound(playerSelection, computerSelection)
+    {
+        let lowercaseSelection = playerSelection.toLowerCase();
+        var message, flag;
+        console.log(lowercaseSelection);
+
+        if(lowercaseSelection === computerSelection)
+        {
+            flag = 0;
+            message = "You draw " + playerSelection + " ties with " + computerSelection + " adding another round";
+        }
+        else if(lowercaseSelection==="scissors" && computerSelection==="paper")
+        {
+            flag = 1;
+            message = winPrint(playerSelection, computerSelection);
+        }
+        else if(lowercaseSelection==="paper" && computerSelection==="rock")
+        {
+            flag = 1;
+            message = winPrint(playerSelection, computerSelection);
+        }
+        else if(lowercaseSelection==="rock" && computerSelection==="scissors")
+        {
+            flag = 1;
+            message = winPrint(playerSelection, computerSelection);
+        }
+        else
+        {
+            flag = -1;
+            message = losePrint(playerSelection, computerSelection);
+        }
+        console.log(message);
+        return flag;
+    }
+
+    function losePrint(playerSelection, computerSelection)
+    {
+        var lose;
+        lose = "You Lose! " + computerSelection + " beats " +  playerSelection;
+        return lose;
+    }
+
+    function winPrint(playerSelection, computerSelection)
+    {
+        var win;
+        win = "You Win! " + playerSelection + " beats " + computerSelection;
+        return win;
+    }
+
+    function game()
+    {
+        let playerScore = 0, computerScore = 0;
+        for(var i = 0; i<5; i++)
+        {
+            let playerSelection = prompt("Choose Rock, Paper, or Scissors");
+            let computerSelection = computerPlay();
+            let flag = playRound(playerSelection, computerSelection);
+            
+            if(flag == -1)
+                computerScore++;
+            else if(flag == 1)
+                playerScore++;
+            else if(flag == 0)
+                i--;
+        }
+
+        if(playerScore > computerScore)
+            console.log("You win the Best of 5\nPlayer Score:  " + playerScore + "\nComputer Score:  " + computerScore);
+        else if(playerScore < computerScore)
+            console.log("You lose the Best of 5\nPlayer Score:  " + playerScore + "\nComputer Score:  " + computerScore);
+    }
+
+    
+</script>
